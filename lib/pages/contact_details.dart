@@ -5,6 +5,11 @@ class ContactDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final firstNameController = TextEditingController();
+    final lastNameController = TextEditingController();
+    final emailController = TextEditingController();
+    final contactNumberController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('CONTACT DETAILS'),
@@ -27,11 +32,13 @@ class ContactDetails extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                     child: TextFormField(
+                  controller: firstNameController,
                   decoration: InputDecoration(labelText: 'FIRST NAME'),
                 )),
                 const SizedBox(width: 10.0),
                 Expanded(
                     child: TextFormField(
+                  controller: lastNameController,
                   decoration: const InputDecoration(labelText: 'LAST NAME'),
                 )),
               ],
@@ -40,12 +47,14 @@ class ContactDetails extends StatelessWidget {
               height: 20.0,
             ),
             TextFormField(
+              controller: contactNumberController,
               decoration: const InputDecoration(labelText: 'CONTACT NUMBER'),
             ),
             const SizedBox(
               height: 20.0,
             ),
             TextFormField(
+              controller: emailController,
               decoration: const InputDecoration(labelText: 'EMAIL'),
             ),
             const SizedBox(
