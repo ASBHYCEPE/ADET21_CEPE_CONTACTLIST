@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:contact_list/models/contacts.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
@@ -24,14 +25,27 @@ class DatabaseHelper {
     return await openDatabase(path, version: _version, onCreate: _createDB);
   }
 
-  Future _createDB(Database db, int Vesrion) async {
+  Future _createDB(Database db, int vesrion) async {
     const String sql = '''CREATE TABLE contacts 
-        (id INTEGER PRIMARY KEY, firstName 
-        VARCHAR(255) NOT NULL, 
+        (id INTEGER PRIMARY KEY, 
+        firstName VARCHAR(255) NOT NULL, 
         lastName VARCHAR(255) NOT NULL, 
         contactNumber VARCHAR(25) NOT NULL, 
-        email VARCHAR(255))''';
+        email VARCHAR(255));''';
 
     return await db.execute(sql);
+  }
+
+  Future<List<Contact>?> getAllContacts() async {
+    final db = await instance.database;
+
+    final List<Map<String, dynamic>> data =
+        await db.query('contacts', orderBy: 'firstName ASC');
+
+    if (data.isEmpty) {
+      return null;
+    }
+
+    return List.generate(data.length, (index) => Contact.fromJson(data[index]));
   }
 }
