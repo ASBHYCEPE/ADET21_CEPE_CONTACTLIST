@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:contact_list/models/contacts.dart';
 
 class ContactDetails extends StatelessWidget {
-  const ContactDetails({Key? key}) : super(key: key);
+  final Contact? contact;
+  const ContactDetails({Key? key, this.contact}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,6 +11,13 @@ class ContactDetails extends StatelessWidget {
     final lastNameController = TextEditingController();
     final emailController = TextEditingController();
     final contactNumberController = TextEditingController();
+
+    if (contact != null) {
+      firstNameController.text = contact!.firstName;
+      lastNameController.text = contact!.lastName;
+      emailController.text = contact!.email!;
+      contactNumberController.text = contact!.contactNumber;
+    }
 
     return Scaffold(
       appBar: AppBar(
