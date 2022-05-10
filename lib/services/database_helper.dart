@@ -9,6 +9,14 @@ class DatabaseHelper {
 
   DatabaseHelper._init();
 
+  Future<Database> get database async {
+    if (_database != null) return _database!;
+
+    _database = await _initDB(_dbName);
+
+    return _database!;
+  }
+
   Future<Database> _initDB(String dbName) async {
     final dbFilePath = await getDatabasesPath();
     final path = join(dbFilePath, dbName);
