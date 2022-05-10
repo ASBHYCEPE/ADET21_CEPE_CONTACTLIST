@@ -4,6 +4,7 @@ import 'package:contact_list/services/database_helper.dart';
 
 class ContactDetails extends StatelessWidget {
   final Contact? contact;
+
   const ContactDetails({Key? key, this.contact}) : super(key: key);
 
   @override
