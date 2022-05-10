@@ -26,26 +26,70 @@ class _ContactListState extends State<ContactList> {
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
         child: FutureBuilder(
-          future: DatabaseHelper.instance.getAllContacts(),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Contact>?> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            } else if (snapshot.hasData) {
-              if (snapshot.data != null) {
-                ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) =>
-                        ContactCard(contact: snapshot.data![index]));
+            future: DatabaseHelper.instance.getAllContacts(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Contact>?> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Center(child: Text(snapshot.error.toString()));
+              } else if (snapshot.hasData) {
+                if (snapshot.data != null) {
+                  return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) => ContactCard(
+                            contact: snapshot.data![index],
+                            onTap: () async {
+                              await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ContactDetails(
+                                            contact: snapshot.data![index],
+                                          )));
+                              setState(() {});
+                            },
+                            onLongPress: () async {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                          'Are your sure you want to delete this?'),
+                                      actions: [
+                                        ElevatedButton(
+                                          child: const Text('YES'),
+                                          style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty.all(
+                                                      Colors.red)),
+                                          onPressed: () async {
+                                            await DatabaseHelper.instance
+                                                .deleteContact(
+                                                    snapshot.data![index]);
+                                            Navigator.pop(context);
+                                            setState(() {});
+                                          },
+                                        ),
+                                        ElevatedButton(
+                                            child: const Text('NO'),
+                                            style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.green)),
+                                            onPressed: () =>
+                                                Navigator.pop(context))
+                                      ],
+                                    );
+                                  });
+                            },
+                          ));
+                }
+                return const Center(
+                  child: Text('NO LIST OF STUDENTS'),
+                );
               }
-            }
-            return const Center(
-              child: Text('NO CONTACTS'),
-            );
-          },
-        ),
+              return const SizedBox.shrink();
+            }),
       ),
     );
   }
