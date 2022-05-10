@@ -31,7 +31,7 @@ class DatabaseHelper {
         firstName VARCHAR(255) NOT NULL, 
         lastName VARCHAR(255) NOT NULL, 
         contactNumber VARCHAR(25) NOT NULL, 
-        email TEXT);''';
+        email VARCHAR(255));''';
 
     return await db.execute(sql);
   }
