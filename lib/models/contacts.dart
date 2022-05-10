@@ -12,6 +12,12 @@ class Contact {
       this.email,
       this.id});
 
+  factory Contact.fromJson(Map<String, dynamic> json) => Contact(
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      email: json['email'],
+      contactNumber: json['contactNumber']);
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'firstName': firstName,
