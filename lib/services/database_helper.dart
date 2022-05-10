@@ -13,6 +13,17 @@ class DatabaseHelper {
     final dbFilePath = await getDatabasesPath();
     final path = join(dbFilePath, dbName);
 
-    return await openDatabase(path, version: _version);
+    return await openDatabase(path, version: _version, onCreate: _createDB);
+  }
+
+  Future _createDB(Database db, int Vesrion) async {
+    const String sql = '''CREATE TABLE contacts 
+        (id INTEGER PRIMARY KEY, firstName 
+        VARCHAR(255) NOT NULL, 
+        lastName VARCHAR(255) NOT NULL, 
+        contactNumber VARCHAR(25) NOT NULL, 
+        email VARCHAR(255))''';
+
+    return await db.execute(sql);
   }
 }
