@@ -31,13 +31,13 @@ class DatabaseHelper {
         firstName VARCHAR(255) NOT NULL, 
         lastName VARCHAR(255) NOT NULL, 
         contactNumber VARCHAR(25) NOT NULL, 
-        email VARCHAR(255));''';
+        email TEXT);''';
 
     return await db.execute(sql);
   }
 
   Future<List<Contact>?> getAllContacts() async {
-    final db = await instance.database;
+    final db = await database;
 
     final List<Map<String, dynamic>> data =
         await db.query('contacts', orderBy: 'firstName ASC');
