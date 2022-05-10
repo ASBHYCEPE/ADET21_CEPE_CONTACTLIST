@@ -13,6 +13,7 @@ class Contact {
       this.id});
 
   factory Contact.fromJson(Map<String, dynamic> json) => Contact(
+      id: json['id'],
       firstName: json['firstName'],
       lastName: json['lastName'],
       email: json['email'],
