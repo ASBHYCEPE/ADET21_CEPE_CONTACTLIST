@@ -33,7 +33,7 @@ class ContactDetails extends StatelessWidget {
                 Expanded(
                     child: TextFormField(
                   controller: firstNameController,
-                  decoration: InputDecoration(labelText: 'FIRST NAME'),
+                  decoration: const InputDecoration(labelText: 'FIRST NAME'),
                 )),
                 const SizedBox(width: 10.0),
                 Expanded(
