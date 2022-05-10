@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:contact_list/models/contacts.dart';
+import 'package:contact_list/services/database_helper.dart';
 
 class ContactDetails extends StatelessWidget {
   final Contact? contact;
@@ -70,7 +71,34 @@ class ContactDetails extends StatelessWidget {
               height: 20.0,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                final firstName = firstNameController.text;
+                final lastName = lastNameController.text;
+                final contactNumber = contactNumberController.text;
+                final email = emailController.text;
+
+                if (firstName.isEmpty ||
+                    lastName.isEmpty ||
+                    contactNumber.isEmpty ||
+                    email.isEmpty) {
+                  return;
+                }
+
+                final Contact model = Contact(
+                    firstName: firstName,
+                    lastName: lastName,
+                    contactNumber: contactNumber,
+                    email: email,
+                    id: contact?.id);
+
+                if (contact == null) {
+                  await DatabaseHelper.instance.addContact(model);
+                } else {
+                  await DatabaseHelper.instance.updateContact(model);
+                }
+
+                Navigator.pop(context);
+              },
               child: const Text(
                 'SAVE INFORMATION',
                 style: TextStyle(
