@@ -48,4 +48,24 @@ class DatabaseHelper {
 
     return List.generate(data.length, (index) => Contact.fromJson(data[index]));
   }
+
+  Future<int> addContact(Contact contact) async {
+    final db = await database;
+
+    return await db.insert('contacts', contact.toJson());
+  }
+
+  Future<int> updateContact(Contact contact) async {
+    final db = await database;
+    return await db.update('contacts', contact.toJson(),
+        where: 'id = ?',
+        whereArgs: [contact.id],
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<int> deleteContact(Contact contact) async {
+    final db = await database;
+
+    return db.delete('contacts', where: 'id = ?', whereArgs: [contact.id]);
+  }
 }
