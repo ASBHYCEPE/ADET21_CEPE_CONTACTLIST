@@ -11,4 +11,12 @@ class Contact {
       required this.contactNumber,
       this.email,
       this.id});
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'contactNumber': contactNumber
+      };
 }
