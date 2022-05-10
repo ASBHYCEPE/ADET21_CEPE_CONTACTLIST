@@ -17,9 +17,12 @@ class _ContactListState extends State<ContactList> {
     return Scaffold(
       appBar: AppBar(title: const Text('CONTACT LIST')),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ContactDetails()));
+        onPressed: () async {
+          await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => const ContactDetails())));
+          setState(() {});
         },
         child: const Icon(Icons.person_add),
       ),
@@ -35,13 +38,13 @@ class _ContactListState extends State<ContactList> {
                 return Center(child: Text(snapshot.error.toString()));
               } else if (snapshot.hasData) {
                 if (snapshot.data != null) {
-                  ListView.builder(
+                  return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) =>
                           ContactCard(contact: snapshot.data![index]));
                 }
                 return const Center(
-                  child: Text('NO LIST OF STUDENTS'),
+                  child: Text('NO LIST OF CONTACTS'),
                 );
               }
               return const SizedBox.shrink();
