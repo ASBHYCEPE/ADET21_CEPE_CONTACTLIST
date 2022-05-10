@@ -80,8 +80,7 @@ class ContactDetails extends StatelessWidget {
 
                 if (firstName.isEmpty ||
                     lastName.isEmpty ||
-                    contactNumber.isEmpty ||
-                    email.isEmpty) {
+                    contactNumber.isEmpty) {
                   return;
                 }
 
