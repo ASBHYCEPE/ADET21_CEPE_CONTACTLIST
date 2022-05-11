@@ -4,8 +4,10 @@ import 'package:contact_list/services/database_helper.dart';
 
 class ContactDetails extends StatelessWidget {
   final Contact? contact;
+  final String buttonText;
 
-  const ContactDetails({Key? key, this.contact}) : super(key: key);
+  const ContactDetails({Key? key, this.contact, required this.buttonText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +101,9 @@ class ContactDetails extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: const Text(
-                'SAVE INFORMATION',
-                style: TextStyle(
+              child: Text(
+                buttonText,
+                style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
