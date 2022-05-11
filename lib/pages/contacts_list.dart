@@ -21,7 +21,9 @@ class _ContactListState extends State<ContactList> {
           await Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: ((context) => const ContactDetails())));
+                  builder: ((context) => const ContactDetails(
+                        buttonText: 'ADD TO CONTACT',
+                      ))));
           setState(() {});
         },
         child: const Icon(Icons.person_add),
@@ -47,7 +49,9 @@ class _ContactListState extends State<ContactList> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ContactDetails(
-                                          contact: snapshot.data![index])));
+                                            contact: snapshot.data![index],
+                                            buttonText: 'UPDATE CONTACT',
+                                          )));
                               setState(() {});
                             },
                             onLongPress: () async {
