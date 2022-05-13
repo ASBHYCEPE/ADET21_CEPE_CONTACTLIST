@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:contact_list/models/contacts.dart';
 import 'package:contact_list/services/database_helper.dart';
+import 'package:flutter/services.dart';
 
 class ContactDetails extends StatelessWidget {
   final Contact? contact;
@@ -62,12 +63,15 @@ class ContactDetails extends StatelessWidget {
             TextFormField(
               controller: contactNumberController,
               decoration: const InputDecoration(labelText: 'CONTACT NUMBER'),
+              keyboardType: TextInputType.phone,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
             const SizedBox(
               height: 20.0,
             ),
             TextFormField(
               controller: emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(labelText: 'EMAIL'),
             ),
             const SizedBox(
