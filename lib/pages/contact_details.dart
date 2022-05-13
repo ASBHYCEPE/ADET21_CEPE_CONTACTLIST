@@ -84,7 +84,8 @@ class ContactDetails extends StatelessWidget {
             TextFormField(
               controller: addressController,
               decoration: const InputDecoration(
-                  labelText: 'EMAIL', icon: Icon(Icons.location_city)),
+                  labelText: 'Current Address',
+                  icon: Icon(Icons.location_city)),
             ),
             const SizedBox(
               height: 20.0,
