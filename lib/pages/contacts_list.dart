@@ -90,11 +90,10 @@ class _ContactListState extends State<ContactList> {
                             },
                           ));
                 }
-                return const Center(
-                  child: Text('NO LIST OF CONTACTS'),
-                );
               }
-              return const SizedBox.shrink();
+              return const Center(
+                child: Text('NO AVAILABLE CONTACTS'),
+              );
             }),
       ),
     );
