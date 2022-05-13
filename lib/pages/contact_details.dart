@@ -16,12 +16,14 @@ class ContactDetails extends StatelessWidget {
     final lastNameController = TextEditingController();
     final emailController = TextEditingController();
     final contactNumberController = TextEditingController();
+    final addressController = TextEditingController();
 
     if (contact != null) {
       firstNameController.text = contact!.firstName;
       lastNameController.text = contact!.lastName;
       emailController.text = contact!.email!;
       contactNumberController.text = contact!.contactNumber;
+      addressController.text = contact!.address;
     }
 
     return Scaffold(
@@ -79,11 +81,20 @@ class ContactDetails extends StatelessWidget {
             const SizedBox(
               height: 20.0,
             ),
+            TextFormField(
+              controller: addressController,
+              decoration: const InputDecoration(
+                  labelText: 'EMAIL', icon: Icon(Icons.location_city)),
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
             TextButton(
               onPressed: () async {
                 final firstName = firstNameController.text;
                 final lastName = lastNameController.text;
                 final contactNumber = contactNumberController.text;
+                final address = addressController.text;
                 final email = emailController.text;
 
                 if (firstName.isEmpty ||
@@ -96,6 +107,7 @@ class ContactDetails extends StatelessWidget {
                     firstName: firstName,
                     lastName: lastName,
                     contactNumber: contactNumber,
+                    address: address,
                     email: email,
                     id: contact?.id);
 
