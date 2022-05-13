@@ -30,7 +30,8 @@ class DatabaseHelper {
         (id INTEGER PRIMARY KEY, 
         firstName VARCHAR(255) NOT NULL, 
         lastName VARCHAR(255) NOT NULL, 
-        contactNumber VARCHAR(25) NOT NULL, 
+        contactNumber VARCHAR(25) NOT NULL,
+        address VARCHAR(255), 
         email VARCHAR(255));''';
 
     return await db.execute(sql);
