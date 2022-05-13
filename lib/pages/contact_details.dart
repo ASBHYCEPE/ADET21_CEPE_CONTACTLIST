@@ -62,7 +62,8 @@ class ContactDetails extends StatelessWidget {
             ),
             TextFormField(
               controller: contactNumberController,
-              decoration: const InputDecoration(labelText: 'CONTACT NUMBER'),
+              decoration: const InputDecoration(
+                  labelText: 'CONTACT NUMBER', icon: Icon(Icons.phone)),
               keyboardType: TextInputType.phone,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             ),
@@ -72,7 +73,8 @@ class ContactDetails extends StatelessWidget {
             TextFormField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(labelText: 'EMAIL'),
+              decoration: const InputDecoration(
+                  labelText: 'EMAIL', icon: Icon(Icons.email)),
             ),
             const SizedBox(
               height: 20.0,
