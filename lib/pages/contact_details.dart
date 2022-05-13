@@ -23,7 +23,7 @@ class ContactDetails extends StatelessWidget {
       lastNameController.text = contact!.lastName;
       emailController.text = contact!.email!;
       contactNumberController.text = contact!.contactNumber;
-      addressController.text = contact!.address;
+      addressController.text = contact!.address!;
     }
 
     return Scaffold(
