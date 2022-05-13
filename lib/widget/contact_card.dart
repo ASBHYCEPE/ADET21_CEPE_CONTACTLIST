@@ -19,8 +19,11 @@ class ContactCard extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         onLongPress: onLongPress,
+        leading: CircleAvatar(
+          child: Text(contact.firstName.substring(0, 1)),
+        ),
         title: Text(
-          contact.firstName,
+          contact.firstName + ' ' + contact.lastName,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(contact.contactNumber),
